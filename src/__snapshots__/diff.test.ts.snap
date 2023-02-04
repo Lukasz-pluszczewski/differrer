@@ -1,0 +1,261 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`diff diff views jsVIew of diff which compares differences in arrays of objects 1`] = `
+"[
+  {
+    value: 'foo',
+    order: 0,
+  },
+  {
+    order: 1,
+    value: 'bar', // ~ 'barrr'
+  }, // ~
+] // ~"
+`;
+
+exports[`diff diff views jsVIew of diff which compares differences in arrays of objects 2`] = `
+"[
+  {
+    value: 'foo',
+    order: 0,
+  },
+  {
+    order: 1,
+    value: 'bar', // ~ 'barrr'
+  }, // ~
+  {
+    order: 2,
+    value: 'baz',
+  },
+  {
+    order: 5, // -
+    value: 'removed', // -
+  }, // -
+  {
+    order: 10, // +
+    value: 'added', // +
+  }, // +
+] // ~"
+`;
+
+exports[`diff diff views jsVIew of diff which compares differences in objects 1`] = `
+"{
+  bar: 'test',
+  foo: 'test', // ~ 'test2'
+  bam: 'deleted', // -
+  baz: 'added', // +
+} // ~"
+`;
+
+exports[`diff diff views jsVIew of diff which compares differences in simple arrays 1`] = `
+"[
+  'abc',
+  'def',
+  'ghi', // ~ 'ghii'
+  'zzz', // +
+] // ~"
+`;
+
+exports[`diff diff views jsVIew of diff which compares differences when array contains simple types and objects in the same indexes 1`] = `
+"[
+  1,
+  2, // ~ {"foo":2}
+] // ~"
+`;
+
+exports[`diff diff views jsVIew of diff which compares null to undefined 1`] = `"null // ~ undefined"`;
+
+exports[`diff diff views jsVIew of diff which compares nulls 1`] = `"null"`;
+
+exports[`diff diff views jsVIew of diff which compares simple different booleans 1`] = `"true // ~ false"`;
+
+exports[`diff diff views jsVIew of diff which compares simple different numbers 1`] = `"1 // ~ 2"`;
+
+exports[`diff diff views jsVIew of diff which compares simple different strings 1`] = `"'test' // ~ 'test2'"`;
+
+exports[`diff diff views jsVIew of diff which compares simple same booleans 1`] = `"true"`;
+
+exports[`diff diff views jsVIew of diff which compares simple same numbers 1`] = `"10"`;
+
+exports[`diff diff views jsVIew of diff which compares simple same strings 1`] = `"'test'"`;
+
+exports[`diff diff views sortedView of diff which compares differences in arrays of objects 1`] = `
+{
+  "source": "[
+  {
+    value: 'foo',
+    order: 0,
+  },
+  {
+    order: 1,
+    value: 'bar',
+  },
+]",
+  "target": "[
+  {
+    value: 'foo',
+    order: 0,
+  },
+  {
+    order: 1,
+    value: 'barrr',
+  },
+]",
+}
+`;
+
+exports[`diff diff views sortedView of diff which compares differences in arrays of objects 2`] = `
+{
+  "source": "[
+  {
+    value: 'foo',
+    order: 0,
+  },
+  {
+    order: 1,
+    value: 'bar',
+  },
+  {
+    order: 2,
+    value: 'baz',
+  },
+  {
+    order: 5,
+    value: 'removed',
+  },
+
+
+
+
+]",
+  "target": "[
+  {
+    value: 'foo',
+    order: 0,
+  },
+  {
+    order: 1,
+    value: 'barrr',
+  },
+  {
+    order: 2,
+    value: 'baz',
+  },
+
+
+
+
+  {
+    order: 10,
+    value: 'added',
+  },
+]",
+}
+`;
+
+exports[`diff diff views sortedView of diff which compares differences in objects 1`] = `
+{
+  "source": "{
+  bar: 'test',
+  foo: 'test',
+  bam: 'deleted',
+
+}",
+  "target": "{
+  bar: 'test',
+  foo: 'test2',
+
+  baz: 'added',
+}",
+}
+`;
+
+exports[`diff diff views sortedView of diff which compares differences in simple arrays 1`] = `
+{
+  "source": "[
+  'abc',
+  'def',
+  'ghi',
+
+]",
+  "target": "[
+  'abc',
+  'def',
+  'ghii',
+  'zzz',
+]",
+}
+`;
+
+exports[`diff diff views sortedView of diff which compares differences when array contains simple types and objects in the same indexes 1`] = `
+{
+  "source": "[
+  1,
+  2,
+
+
+]",
+  "target": "[
+  1,
+  {
+    foo: 2,
+  },
+]",
+}
+`;
+
+exports[`diff diff views sortedView of diff which compares null to undefined 1`] = `
+{
+  "source": "null",
+  "target": "undefined",
+}
+`;
+
+exports[`diff diff views sortedView of diff which compares nulls 1`] = `
+{
+  "source": "null",
+  "target": "null",
+}
+`;
+
+exports[`diff diff views sortedView of diff which compares simple different booleans 1`] = `
+{
+  "source": "true",
+  "target": "false",
+}
+`;
+
+exports[`diff diff views sortedView of diff which compares simple different numbers 1`] = `
+{
+  "source": "1",
+  "target": "2",
+}
+`;
+
+exports[`diff diff views sortedView of diff which compares simple different strings 1`] = `
+{
+  "source": "'test'",
+  "target": "'test2'",
+}
+`;
+
+exports[`diff diff views sortedView of diff which compares simple same booleans 1`] = `
+{
+  "source": "true",
+  "target": "true",
+}
+`;
+
+exports[`diff diff views sortedView of diff which compares simple same numbers 1`] = `
+{
+  "source": "10",
+  "target": "10",
+}
+`;
+
+exports[`diff diff views sortedView of diff which compares simple same strings 1`] = `
+{
+  "source": "'test'",
+  "target": "'test'",
+}
+`;
