@@ -1,13 +1,13 @@
-import { DiffDetails, getType } from './main';
+import { DiffDetails, getType } from '../main';
 
 const INDENT_SIZE = 2;
 
 const getIndent = (spaces: number) => ' '.repeat(spaces * INDENT_SIZE);
 
-const renderValue = (value: any) => {
+export const renderValue = (value: any) => {
   const valueType = getType(value);
   if (valueType === 'string') {
-    return `'${value.replace(/\'/g, '\\\'')}'`;
+    return `'${value.replace(/'/g, '\\\'')}'`;
   }
   if (['array', 'object'].includes(valueType)) {
     return JSON.stringify(value);
@@ -16,7 +16,7 @@ const renderValue = (value: any) => {
 }
 
 
-const renderKey = (key?: string | number | null) => {
+export const renderKey = (key?: string | number | null) => {
   if (typeof key === 'number') {
     return '';
   }

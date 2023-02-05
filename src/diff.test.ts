@@ -1,8 +1,8 @@
 import {
   diff,
-  getType,
   diffJsView as generateJsView,
   diffSortedView as generateSortedView,
+  diffChangesViewConsole as generateChangesViewConsole,
   GetArrayElementId,
 } from './main';
 
@@ -1183,6 +1183,13 @@ describe('diff', () => {
       })(source, target);
       expect(result).toEqual(expected);
     });
+    it(`${testName} without sorting arrays`, async () => {
+      const result = diff({
+        sortArrayItems: true,
+        getArrayElementId,
+      })(source, target);
+      expect(result).toEqual(expected);
+    });
   }
   describe('diff views', () => {
     for (const [testName, source, target] of tests) {
@@ -1199,6 +1206,32 @@ describe('diff', () => {
           getArrayElementId,
         })(source, target);
         expect(generateSortedView(result)).toMatchSnapshot();
+      });
+      it(`diffChangesView of diff which ${testName}`, async () => {
+        const result = diff({
+          sortArrayItems: true,
+          getArrayElementId,
+        })(source, target);
+        expect(generateChangesViewConsole(result)).toMatchSnapshot();
+      });
+
+      it(`jsVIew of diff which ${testName} without sorting arrays`, async () => {
+        const result = diff({
+          getArrayElementId,
+        })(source, target);
+        expect(generateJsView(result)).toMatchSnapshot();
+      });
+      it(`sortedView of diff which ${testName} without sorting arrays`, async () => {
+        const result = diff({
+          getArrayElementId,
+        })(source, target);
+        expect(generateSortedView(result)).toMatchSnapshot();
+      });
+      it(`diffChangesView of diff which ${testName} without sorting arrays`, async () => {
+        const result = diff({
+          getArrayElementId,
+        })(source, target);
+        expect(generateChangesViewConsole(result)).toMatchSnapshot();
       });
     }
   });

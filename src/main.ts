@@ -1,5 +1,6 @@
-export { diffJsView } from './diffJsView';
-export { diffSortedView } from './diffSortedView';
+export { diffJsView } from './diffJsView/diffJsView';
+export { diffSortedView } from './diffSortedView/diffSortedView';
+export { diffChangesViewConsole, diffChangesViewRaw } from './diffChangesView/diffChangesView';
 
 const sortIds = (ids: (string|number)[]) =>
   ids.sort(

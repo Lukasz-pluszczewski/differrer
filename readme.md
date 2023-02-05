@@ -304,6 +304,40 @@ Here are a few examples:
 <td>
 
 ```json5
+{
+  foo: 123,
+  bar: 456,
+}
+```
+
+</td>
+<td>
+
+```json5
+{
+  foo: 123,
+  bar: '457',
+  baz: 789,
+}
+```
+
+</td>
+<td>
+
+```json5
+{
+  foo: 123,
+  bar: 456, // ~ '457'
+  baz: 789, // +
+} // ~
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+```json5
 [
   {
     id: 10,
@@ -416,6 +450,81 @@ Here are a few examples:
 
 </td>
 </tr>
+<tr>
+<td>
+
+```json5
+[
+  {
+    id: 'ten',
+    value: {
+      foo: 'foo',
+      bar: 'bar',
+    },
+  },
+  {
+    id: 'one',
+    value: 'bar',
+  },
+  {
+    id: 'two',
+    value: 'baz',
+  },
+]
+```
+
+</td>
+<td>
+
+```json5
+[
+  {
+    id: 'ten',
+    value: {
+      foo: 'foo',
+      bar: 'nieBar',
+    },
+  },
+  {
+    id: 'one',
+    value: 'barr',
+  },
+  {
+    id: 'three',
+    value: 'baz',
+  },
+]
+```
+
+</td>
+<td>
+
+```json5
+[
+  {
+    id: 'one',
+    value: 'bar', // ~ 'barr'
+  }, // ~
+  {
+    id: 'ten',
+    value: {
+      foo: 'foo',
+      bar: 'bar', // ~ 'nieBar'
+    }, // ~
+  }, // ~
+  {
+    id: 'three', // +
+    value: 'baz', // +
+  }, // +
+  {
+    id: 'two', // -
+    value: 'baz', // -
+  }, // -
+] // ~
+```
+
+</td>
+</tr>
 </table>
 
 You can save the result to a file and have a valid JS code (or valid JSON5):
@@ -435,6 +544,70 @@ View that allows easier comparison in text diff tools that compare strings line 
 Here are a few examples:
 
 <table>
+<tr>
+<td colspan="2">
+<h3>Data:</h3>
+</td>
+</tr>
+<tr><td>Source</td><td>Compare</td></tr>
+<tr>
+<td>
+
+```json5
+{
+  foo: 123,
+  bar: 456,
+}
+```
+
+</td>
+<td>
+
+```json5
+{
+  foo: 123,
+  bar: '457',
+  baz: 789,
+}
+```
+
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h3>Results:</h3>
+</td>
+</tr>
+<tr><td>Source</td><td>Compare</td></tr>
+<tr>
+<td>
+
+```json5
+{
+  foo: 123,
+  bar: 456,
+
+}
+```
+
+</td>
+<td>
+
+```json5
+{
+  foo: 123,
+  bar: '457',
+  baz: 789,
+}
+```
+
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<hr>
+</td>
+</tr>
 <tr>
 <td colspan="2">
 <h3>Data:</h3>
@@ -621,6 +794,304 @@ Here are a few examples:
   },
 ]
 ```
+
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<hr>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h3>Data:</h3>
+</td>
+</tr>
+<tr><td>Source</td><td>Compare</td></tr>
+<tr>
+<td>
+
+```json5
+[
+  {
+    id: 'ten',
+    value: {
+      foo: 'foo',
+      bar: 'bar',
+    },
+  },
+  {
+    id: 'one',
+    value: 'bar',
+  },
+  {
+    id: 'two',
+    value: 'baz',
+  },
+]
+```
+
+</td>
+<td>
+
+```json5
+[
+  {
+    id: 'ten',
+    value: {
+      foo: 'foo',
+      bar: 'nieBar',
+    },
+  },
+  {
+    id: 'one',
+    value: 'barr',
+  },
+  {
+    id: 'three',
+    value: 'baz',
+  },
+]
+```
+
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<h3>Results:</h3>
+</td>
+</tr>
+<tr><td>Source</td><td>Compare</td></tr>
+<tr>
+<td>
+
+```json5
+[
+  {
+    id: 'one',
+    value: 'bar',
+  },
+  {
+    id: 'ten',
+    value: {
+      foo: 'foo',
+      bar: 'bar',
+    },
+  },
+
+
+
+
+  {
+    id: 'two',
+    value: 'baz',
+  },
+]
+```
+
+</td>
+<td>
+
+```json5
+[
+  {
+    id: 'one',
+    value: 'barr',
+  },
+  {
+    id: 'ten',
+    value: {
+      foo: 'foo',
+      bar: 'nieBar',
+    },
+  },
+  {
+    id: 'three',
+    value: 'baz',
+  },
+
+
+
+
+]
+```
+
+</td>
+</tr>
+</table>
+
+
+### diffChangesView
+View that displays only differences, useful for terminal output.
+
+Here are a few examples:
+
+<table>
+<tr><td>Source</td><td>Compare</td><td>Result</td></tr>
+<tr>
+<td>
+
+```json5
+{
+  foo: 123,
+  bar: 456,
+}
+```
+
+</td>
+<td>
+
+```json5
+{
+  foo: 123,
+  bar: '457',
+  baz: 789,
+}
+```
+
+</td>
+<td>
+
+![/assets/changesConsoleViewExample0.png](/assets/changesConsoleViewExample0.png)
+
+</td>
+</tr>
+<tr>
+<td>
+
+```json5
+[
+  {
+    id: 10,
+    value: 'foo',
+  },
+  {
+    id: 1,
+    value: 'bar',
+  },
+]
+```
+
+</td>
+<td>
+
+```json5
+[
+  {
+    id: 10,
+    value: 'foo',
+  },
+  {
+    id: 1,
+    value: 'barr',
+  },
+]
+```
+
+</td>
+<td>
+
+![/assets/changesConsoleViewExample1.png](/assets/changesConsoleViewExample1.png)
+
+</td>
+</tr>
+<tr>
+<td>
+
+```json5
+[
+  {
+    id: 10,
+    value: 'foo',
+  },
+  {
+    id: 1,
+    value: 'bar',
+  },
+  {
+    id: 2,
+    value: 'baz',
+  },
+]
+```
+
+</td>
+<td>
+
+```json5
+[
+  {
+    id: 10,
+    value: 'foo',
+  },
+  {
+    id: 1,
+    value: 'barr',
+  },
+  {
+    id: 3,
+    value: 'baz',
+  },
+]
+```
+
+</td>
+<td>
+
+![/assets/changesConsoleViewExample2.png](/assets/changesConsoleViewExample2.png)
+
+</td>
+</tr>
+<tr>
+<td>
+
+```json5
+[
+  {
+    id: 'ten',
+    value: {
+      foo: 'foo',
+      bar: 'bar',
+    },
+  },
+  {
+    id: 'one',
+    value: 'bar',
+  },
+  {
+    id: 'two',
+    value: 'baz',
+  },
+]
+```
+
+</td>
+<td>
+
+```json5
+[
+  {
+    id: 'ten',
+    value: {
+      foo: 'foo',
+      bar: 'nieBar',
+    },
+  },
+  {
+    id: 'one',
+    value: 'barr',
+  },
+  {
+    id: 'three',
+    value: 'baz',
+  },
+]
+```
+
+</td>
+<td>
+
+![/assets/changesConsoleViewExample3.png](/assets/changesConsoleViewExample3.png)
 
 </td>
 </tr>
