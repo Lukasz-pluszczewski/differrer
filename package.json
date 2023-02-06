@@ -1,14 +1,14 @@
 {
   "name": "differrer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "files": ["dist"],
-  "main": "./dist/differrer.umd.cjs",
+  "main": "./dist/differrer.umd.js",
   "module": "./dist/differrer.mjs",
   "types": "./dist/main.d.ts",
   "exports": {
     ".": {
       "import": "./dist/differrer.mjs",
-      "require": "./dist/differrer.umd.cjs"
+      "require": "./dist/differrer.umd.js"
     }
   },
   "repository": {
