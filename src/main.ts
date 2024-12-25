@@ -97,6 +97,7 @@ export type DiffDetails = {
 export type DiffOptions = {
   sortArrayItems?: boolean,
   getArrayElementId: GetArrayElementId,
+  getValue?: (value: ValueForDiff, path: (string|number)[] | null) => ValueForDiff,
 };
 
 export const getArrayElementIdWrapper = (getArrayElementId: GetArrayElementId) => (value: unknown, path: (string|number)[] | null, parent?: unknown) => {
@@ -110,6 +111,7 @@ export const getArrayElementIdWrapper = (getArrayElementId: GetArrayElementId) =
 export const diff = ({
   sortArrayItems = false,
   getArrayElementId: getArrayElementIdRaw,
+  getValue,
 }: DiffOptions) => (source: ValueForDiff, target: ValueForDiff): DiffDetails => {
   const getArrayElementId = getArrayElementIdWrapper(getArrayElementIdRaw);
   const createDiff = (
@@ -117,9 +119,12 @@ export const diff = ({
     targetPath: (string|number)[] | null = [],
     sourceOrder: string | number | null = null,
     targetOrder: string | number | null = null,
-    sourceValue: ValueForDiff,
-    targetValue: ValueForDiff
+    originalSourceValue: ValueForDiff,
+    originalTargetValue: ValueForDiff
   ): DiffDetails => {
+    const sourceValue = getValue ? getValue(originalSourceValue, sourcePath) : originalSourceValue;
+    const targetValue = getValue ? getValue(originalTargetValue, targetPath) : originalTargetValue;
+
     const sourceType = getType(sourceValue);
     const targetType = getType(targetValue);
 

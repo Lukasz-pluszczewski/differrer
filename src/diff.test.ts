@@ -1235,4 +1235,34 @@ describe('diff', () => {
       });
     }
   });
+  describe('getValue parameter', () => {
+    it('allows to modify values', () => {
+      const source = [{ id: 10, random: Math.random(), value: 'foo' }, { id: 1, random: Math.random(), value: 'bar' }];
+      const compare = [{ id: 1, random: Math.random(), value: 'bar' }, { id: 10, random: Math.random(), value: 'foo' }];
+
+      const results = diff({
+        getArrayElementId: (value: any) => value && typeof value === 'object' ? value.id : null,
+        getValue: (value, path) => {
+          if (path && path[path.length - 1] === 'random') {
+            return '[placeholder]';
+          }
+          return value;
+        },
+      })(source, compare);
+
+      expect(results.sameValue).toBe(true);
+      expect(generateJsView(results)).toBe(`[
+  {
+    id: 1,
+    random: '[placeholder]',
+    value: 'bar',
+  },
+  {
+    id: 10,
+    random: '[placeholder]',
+    value: 'foo',
+  },
+]`);
+    });
+  });
 });

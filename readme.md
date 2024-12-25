@@ -235,6 +235,7 @@ createDiff function accepts the following arguments
 - **getArrayElementId**: *function* (optional) - function that allows diff to detect the order of objects in arrays. It accepts an array element and returns the id of the element. If not provided, the order of objects in arrays will not be detected. Keep in mind that it may get any type of item depending on the input data you provided to the diff function.
   - **item**: *any* - the element to get the id from
   - **returns**: *string|number|any* - the id of the element, anything other than string or number will be ignored
+- **getValue**: *function* (optional) - function used to calculate each value before calculating diff.
 - **returns**: *function* - the diff function
 
 ## Diff function
@@ -269,6 +270,33 @@ The diff function returns a tree diff result objects. They contain the following
 
 
 - **children**: *object|array* - the children of the value (if the value is an object or an array)
+
+## getValue function
+getValue function, if provided, will be used to calculate each value, on each level before the diff. For it to be useful, in most cases you need to either only modify the value for certain types (e.g. to allow for Map or Set support) or to modify only values in particular paths.
+
+Usage example
+```ts
+import createDiff, { getType, diffJsView, diffSortedView } from 'differrer';
+
+const source = [{ id: 10, random: Math.random(), value: 'foo' }, { id: 1, random: Math.random(), value: 'bar' }];
+const compare = [{ id: 1, random: Math.random(), value: 'bar' }, { id: 10, random: Math.random(), value: 'foo' }];
+
+const diff = createDiff({
+  getArrayElementId: (value: any) => value && typeof value === 'object' ? value.id : null,
+  getValue: (value, path) => {
+    if (path && path[path.length - 1] === 'random') {
+      return '[placeholder]';
+    }
+    return value;
+  },
+});
+
+const results = diff(source, compare);
+
+expect(results.sameValue).toBe(true);
+```
+
+Keep in mind that the modified value will appear in diff structure only at the leaf that has been changed. The "sourceValue" and "targetValue" in all higher levels will still contain the original values.
 
 ## Supported data types
 The diff function understands the following types: undefined, null, boolean, number, string, array and object (only plain JS objects are considered objects). Anything else will have "unknown" type.
@@ -1096,3 +1124,14 @@ Here are a few examples:
 </td>
 </tr>
 </table>
+
+## Changelog
+
+### 1.1.0
+- Added getValue option to diff function
+
+### 1.0.1
+- Fixed commonJS exports
+
+### 1.0.0
+- Added diffChangesView, improved test coverage, updated readme
