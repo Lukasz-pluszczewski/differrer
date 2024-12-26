@@ -952,6 +952,8 @@ Here are a few examples:
 ### diffChangesView
 View that displays only differences, useful for terminal output.
 
+NOTE: diffChangesView does not support colored output in mjs build, as of version 1.1.1.
+
 Here are a few examples:
 
 <table>
@@ -1126,6 +1128,9 @@ Here are a few examples:
 </table>
 
 ## Changelog
+
+### 1.1.1
+- Fixed diffChangesView in mjs
 
 ### 1.1.0
 - Added getValue option to diff function
