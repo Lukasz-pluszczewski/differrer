@@ -1,6 +1,6 @@
 {
   "name": "differrer",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "files": ["dist"],
   "main": "./dist/differrer.umd.js",
   "module": "./dist/differrer.mjs",

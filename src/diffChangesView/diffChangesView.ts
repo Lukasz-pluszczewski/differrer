@@ -12,7 +12,7 @@ const isNode =
   process.versions.node != null;
 
 const inspect = (value: any): CustomString => {
-  if (isNode && require) {
+  if (isNode && typeof require !== 'undefined') {
     return customString(
       require('util').inspect(value, { colors: false }),
       require('util').inspect(value, { colors: true }),

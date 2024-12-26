@@ -1129,7 +1129,7 @@ Here are a few examples:
 
 ## Changelog
 
-### 1.1.1
+### 1.1.2
 - Fixed diffChangesView in mjs
 
 ### 1.1.0
